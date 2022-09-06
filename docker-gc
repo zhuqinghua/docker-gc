@@ -221,7 +221,7 @@ comm -23 containers.all containers.running > containers.exited
 if [[ $EXCLUDE_DEAD -gt 0 ]]; then
   echo "Excluding dead containers"
   # List dead containers
-  $DOCKER ps -q -a -f status=dead | sort | uniq > containers.dead
+  $DOCKER ps -q -a --no-trunc -f status=dead | sort | uniq > containers.dead
   comm -23 containers.exited containers.dead > containers.exited.tmp
   cp containers.exited.tmp containers.exited
 fi
